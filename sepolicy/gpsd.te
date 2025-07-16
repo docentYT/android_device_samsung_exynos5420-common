@@ -1,0 +1,11 @@
+type gpsd, domain;
+type gpsd_exec, exec_type, file_type;
+
+init_daemon_domain(gpsd)
+
+allow gpsd self:process setpgid;
+allow gpsd self:unix_stream_socket create_stream_socket_perms;
+allow gpsd self:capability { net_admin net_raw };
+allow gpsd gpsd_exec:file { read execute open getattr };
+allow gpsd system_data_file:dir { search read open };
+allow gpsd system_data_file:file { read open getattr };
